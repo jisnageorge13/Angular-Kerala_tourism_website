@@ -1,0 +1,58 @@
+/* General Styles */
+footer {
+    background-color: #96999c;
+    padding: 40px 0;
+}
+
+.footerlink {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.footerlink li {
+    margin-bottom: 10px;
+}
+
+.footerlink a {
+    text-decoration: none;
+    color: #007bff;
+    transition: color 0.3s ease-in-out;
+}
+
+.footerlink a:hover {
+    text-decoration: underline;
+    color: #0056b3;
+}
+
+.widget-title {
+    font-size: 18px;
+    line-height: 1.5;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #343a40;
+}
+
+.contact-det {
+    line-height: 1.7;
+    color: #0c0f11;
+}
+
+.contact-det a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.contact-det a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+/* Responsive Typography */
+@media (max-width: 767px) {
+    .widget-title {
+        font-size: 16px;
+    }
+    .contact-det {
+        font-size: 14px;
+    }
+}

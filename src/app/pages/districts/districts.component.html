@@ -1,0 +1,43 @@
+<app-navbar></app-navbar>
+<div class="container my-4">
+    <div class="row">
+      <div class="col-12">
+        <div class="position-relative">
+          <img src={{districtDetails.main_image}} class="img-fluid" alt="Coral Island" title="Coral Island" style="width: 100%; height: auto;">
+          <div class="position-absolute top-50 start-50 translate-middle text-center text-white" style=" padding: 20px;">
+            <h1 class="text-uppercase" style="font-size: 68px; line-height: 1.4;">{{ districtName }}</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid section3 bg-dark py-4" *ngIf="districtDetails">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section3-heading-css text-white">Places to visit in {{ districtDetails.name }}</h2>
+        <p class="section3-para-css">Travel to the best places in {{ districtDetails.name }} and embrace their wonders. Feel the modern and dynamic vibe, relish in the liveliness, bask on the beaches, and immerse yourself in the serenity. Your {{ districtDetails.name }} adventure awaits!</p>
+      </div>
+  
+      <div class="row">
+        <div class="col-lg-4 col-md-6 mb-4" *ngFor="let place of districtDetails.places">
+          <div class="card">
+            <div class="section3-image-box">
+              <img [src]="place.imgsrc" class="card-img-top img-fluid" [alt]="place.imgalt">
+              <div class="section3-overlay">
+                <div class="section3-overlay-content">
+                  <h3>{{ place.name }}</h3>
+                  <!-- Add place description if available -->
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <h3 class="section3-card-box-heading">{{ place.name }}</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-footer></app-footer>
+  
+  

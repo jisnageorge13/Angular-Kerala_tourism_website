@@ -1,0 +1,54 @@
+
+
+
+<app-navbar></app-navbar>
+<div class="mask-img-section">
+	<div class="mask-box"></div>
+	<div class="mask-box-content">
+		<div class="mask-column mask-column1">
+			<div>
+				<div class="custom-sub-title">Travel in</div>
+				<div class="custom-title">
+					KERALA
+				</div>
+			</div>
+			<p>Want to go on an exciting Kerala trip? It’s simple, just browse Kerala tour packages at Kerala Tourism and get started on a fulfilling journey to the God's Own Country. From sun-soaked backwaters and tantalising dishes to majestic tea estates and revered arts—every journey in Kerala becomes a cherished memory for wanderers. </p>
+		</div>
+		<div class="mask-column mask-column2"><div class="img-para-box slide img-box-mb">
+				
+				<div class="img-content-box">
+					<div class="custom-sub-title">Kerala God's Own Country</div>
+					<p class="text-light">Named as one of the ten paradises of the world by National Geographic Traveler, Kerala is one of the prominent tourist destinations of India, with coconut-lined sandy beaches, backwaters, hill stations, Ayurvedic tourism and tropical greenery as its major attractions.</p>
+				</div>
+			</div><div class="img-para-box slide">
+			
+				
+			</div></div>
+	</div>
+</div>
+
+  <div class="container py-4" style="background-color: #f8f8f8;">
+    <div class="row text-center mb-4">
+      <div class="col">
+        <h2>Popular Destinations</h2>
+      </div>
+    </div>
+    <div class="row">
+        <div *ngFor="let popular of popular_dest; trackBy: popular" class="col-md-4 mb-4">
+          <div class="content position-relative">
+            <a [routerLink]="['/districts', popular.name.toLowerCase()]">
+              <div class="content-overlay"></div>
+              <img class="content-image" [src]="popular.imgsrc" [alt]="popular.imgalt">
+              <div class="content-details fadeIn-bottom">
+                <h3 class="content-title">{{popular.name}}</h3>
+                <span class="view-more-btn">Explore</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      
+  </div>
+  <router-outlet></router-outlet>
+  <app-footer></app-footer>
