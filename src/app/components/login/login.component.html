@@ -54,9 +54,9 @@
                       <input [(ngModel)]="userRegObj.emailId" type="email" class="form-control" name="email" id="email" placeholder="name@gmail.com" required>
                       <label for="email" class="form-label">Email</label>
                       <div *ngIf="userRegObj.emailId.invalid && (userRegObj.emailId.dirty || userRegObj.emailId.touched)" class="text-danger">
-                        <div *ngIf="userRegObj.emailId.errors?.required">Email is required.</div>
-                        <div *ngIf="userRegObj.emailId.errors?.email">Invalid email format.</div>
-                      </div>
+                        <div *ngIf="registrationForm.controls['emailId'].errors?.['required']">Email is required.</div>
+
+                        
                     </div>
                   </div>
                   <div class="col-12">
@@ -64,8 +64,7 @@
                       <input [(ngModel)]="userRegObj.userName" type="text" class="form-control" name="username" id="username" required>
                       <label for="username" class="form-label">Username</label>
                     </div>
-                    <div *ngIf="userRegObj.userName.invalid && (userRegObj.userName.dirty || userRegObj. userName.touched)" class="text-danger">
-                        <div *ngIf="userRegObj.userName.errors?.required">Username is required.</div>
+                      <div class="text-danger" *ngIf="registrationForm.controls['emailId'].errors?.['required']">Email is required.</div>
                       </div>
                   </div>
                   <div class="col-12">
@@ -88,24 +87,12 @@
                       <hr class="mt-5 mb-4 border-secondary-subtle">
                       <div class="d-flex gap-2 gap-md-4 flex-column flex-md-row justify-content-md-end">
                         <a class="link-secondary text-decoration-none" (click)="isLoginView= true">Login</a>
-                        <!-- <a href="#!" class="link-secondary text-decoration-none">Forgot password</a> -->
                   </div>
                 </div>
             </div>
-        </div>
+            </div>
               </form>
             }
-              
-              <!-- <div class="row">
-                <div class="col-12">
-                  <p class="mt-5 mb-4"></p>
-                  <div class="d-flex gap-3 flex-column">
-                    
-                    
-                   
-                  </div>
-                </div>
-              </div> -->
             </div>
           </div>
         </div>
