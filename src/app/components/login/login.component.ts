@@ -1,57 +1,72 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
-import { FormsModule, NgForm } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule,CommonModule],
+  imports: [ReactiveFormsModule,CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
-  isLoginView: boolean = false
-  userRegObj: any = {
-    userName: '',
-    emailId: '',
-    password: ''
+  isLoginView: boolean = true;
+  loginForm: FormGroup;
+  registrationForm: FormGroup;
+
+  constructor(private fb: FormBuilder, private router: Router) {
+    this.loginForm = this.fb.group({
+      username: [''],
+      password: ['']
+    });
+
+    this.registrationForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(16)]],
+      password: ['', [Validators.required, Validators.minLength(6)]]
+    });
   }
-  userLogin: any = {
-    userName: '',
-    password: ''
-  }
-  router =inject(Router)
-  onRegister(registrationForm: NgForm) {
-    if (registrationForm.valid) {
+
+  onLogin() {
+    if (this.loginForm.valid) {
       const isLocalData = localStorage.getItem("angular18Local");
-      if (isLocalData != null) {
-        const localArray = JSON.parse(isLocalData);
-        localArray.push(this.userRegObj);
-        localStorage.setItem("angular18Local", JSON.stringify(localArray));
+      if (isLocalData) {
+        const users = JSON.parse(isLocalData);
+        const isUserFound = users.find((user: any) =>
+          user.userName === this.loginForm.value.username &&
+          user.password === this.loginForm.value.password
+        );
+        if (isUserFound) {
+          this.router.navigateByUrl('home');
+        } else {
+          alert("Username or password is incorrect");
+        }
       } else {
-        const localArray = [];
-        localArray.push(this.userRegObj);
-        localStorage.setItem("angular18Local", JSON.stringify(localArray));
+        alert("No user found");
       }
-      alert('Registration Success');
     } else {
-      alert('Please fill out the form correctly.');
+      alert("Please fill out the login form correctly.");
     }
   }
   
-  onLogin() {
-    const isLocalData = localStorage.getItem("angular18Local");
-    if (isLocalData != null) {
-      const users = JSON.parse(isLocalData)
-      const isUserFound = users.find((m: any) => m.userName == this.userLogin.userName && m.password == this.userLogin.password)
-      if (isUserFound != undefined) {
-        this.router.navigateByUrl('home')
-      } else {
-        alert("User name or password is incorrect")
-      }
+
+  onRegister() {
+    if (this.registrationForm.valid) {
+      const isLocalData = localStorage.getItem("angular18Local");
+      const newUser = {
+        emailId: this.registrationForm.value.email,
+        userName: this.registrationForm.value.username,
+        password: this.registrationForm.value.password
+      };
+
+      let users = isLocalData ? JSON.parse(isLocalData) : [];
+      users.push(newUser);
+      localStorage.setItem("angular18Local", JSON.stringify(users));
+
+      alert('Registration Success');
     } else {
-      alert("No user found")
+      alert('Please fill out the registration form correctly.');
     }
   }
 }
